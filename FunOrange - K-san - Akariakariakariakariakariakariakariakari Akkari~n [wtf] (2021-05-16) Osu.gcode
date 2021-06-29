@@ -43,21 +43,11 @@ M83 ; use relative distances for extrusion
 G1 Z20 ; raise nozzle before travelling to tablet
 G1 X90.000 Y176.000 F2000 ; move to tablet origin
 G1 Z14 ; lower nozzle to tablet
-G4 P2000 ; wait
-G1 X96.682 Y171.971 F2000 ; move nozzle to first object
-G4 P2000 ; wait
-
-; GET READY TO UNPAUSE HERE!!!!
-M300 S262 P50
-G4 P450
-M300 S328 P50
-G4 P450
-M300 S393 P50
-G4 P450
-M300 S524 P10
-; UNPAUSE!!!
-
+G1 X99.919 Y171.500 F2000 ; get ready to select song
 ; START MAP
+G1 Z13.50 F9000 ; tap press
+G1 Z14.00 F9000 ; tap release
+G4 3400 ; delay until first object
 
 G1 X96.65 Y171.97 F109.34
 G1 X96.62 Y171.97 F116.17

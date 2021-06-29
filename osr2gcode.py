@@ -19,11 +19,12 @@ max_printer_travel_speed_mm_per_sec = 180
 tablet_area_width_mm = 16
 tablet_area_height_mm = 9
 
-gcode_tablet_origin_x = 90
-gcode_tablet_origin_y = 176
-gcode_tablet_z = 14
+gcode_tablet_origin_x = 80
+gcode_tablet_origin_y = 175
+gcode_tablet_z = 14.5
+tap_height = 0.5 
 
-repeat_count = 4
+repeat_count = 1
 
 # for converting beatmap object positions to gcode
 speed_factor = 2 # move to next object 2x faster than theoretically necessary
@@ -38,18 +39,18 @@ osu_min_x = -170.66666666666666
 osu_min_y = -56
 osu_max_x = 682.2222
 osu_max_y = 423.5555
+osu_width = osu_max_x - osu_min_x
+osu_height = osu_max_y - osu_min_y
 
 # coordinate transform functions
 def osu_x_to_mm(x):
   # convert from osu coordinate to screen coordinate [0.0, 1.0]
-  osu_width = osu_max_x - osu_min_x
   screenNormalizedX = (x - osu_min_x) / osu_width
   # multiply normalized value by tablet area width
   return screenNormalizedX * tablet_area_width_mm
 
 def osu_y_to_mm(y):
   # convert from osu coordinate to screen coordinate [0.0, 1.0]
-  osu_height = osu_max_y - osu_min_y
   screenNormalizedY = (y - osu_min_y) / osu_height
   # multiply normalized value by tablet area height
   return screenNormalizedY * tablet_area_height_mm
@@ -69,21 +70,28 @@ def osu_y_to_gcode_mm(y):
 max_printer_travel_speed_mm_per_min = 60 * max_printer_travel_speed_mm_per_sec
 
 def pre_beatmap_gcode(f, initial_x, initial_y):
-  f.write(f'G4 P2000 ; wait\n')
-  # move to first cursor position
-  f.write(f'G1 X{initial_x:.3f} Y{initial_y:.3f} F2000 ; move nozzle to first object\n')
-  f.write(f'G4 P2000 ; wait\n')
-  f.write('\n')
-  f.write('; GET READY TO UNPAUSE HERE!!!!\n')
-  f.write('M300 S262 P50\n') # beep
-  f.write('G4 P450\n')
-  f.write('M300 S328 P50\n') # beep
-  f.write('G4 P450\n')
-  f.write('M300 S393 P50\n') # beep
-  f.write('G4 P450\n')
-  f.write('M300 S524 P10\n') # beep!
-  f.write('; UNPAUSE!!!\n')
-  f.write('\n')
+  # move cursor to song button
+  asdfx = osu_x_to_gcode_mm(osu_min_x + osu_width * 0)
+  asdfy = osu_y_to_gcode_mm(osu_min_y + osu_height * 0.5)
+  menu_button_x = osu_x_to_gcode_mm(osu_min_x + osu_width * 1)
+  menu_button_y = osu_y_to_gcode_mm(osu_min_y + osu_height * 0.5)
+  skip_button_x = osu_x_to_gcode_mm(osu_min_x + osu_width * 0.95)
+  skip_button_y = osu_y_to_gcode_mm(osu_min_y + osu_height * 0.95)
+  # f.write(f'G1 X{asdfx:.3f} Y{asdfy:.3f} F2000 ; move nozzle to middle left of screen\n')
+  # f.write(f'G4 P5000 ; wait\n')
+  f.write(f'G1 X{menu_button_x:.3f} Y{menu_button_y:.3f} F2000 ; move nozzle on top of start song button\n')
+  # f.write(f'G4 P5000 ; wait\n')
+  f.write(f'G1 Z{gcode_tablet_z} ; lower nozzle to tablet\n')
+  # f.write(f'M300 S524 P100 ; beep\n')
+  f.write(f'G1 Z{gcode_tablet_z-tap_height:.2f} F9000 ; tap press\n')
+  f.write(f'G1 Z{gcode_tablet_z:.2f} F9000 ; tap release\n')
+  f.write(f'G4 P500 ; wait\n')
+  f.write(f'G1 X{skip_button_x:.3f} Y{skip_button_y:.3f} F2000 ; move nozzle to skip button \n')
+  f.write(f'G1 Z{gcode_tablet_z-tap_height:.2f} F9000 ; tap press\n')
+  f.write(f'G1 Z{gcode_tablet_z:.2f} F9000 ; tap release\n')
+  f.write(f'G4 P500 ; wait\n')
+  f.write(f'G1 X{initial_x:.3f} Y{initial_y:.3f} F2000 ; move to first hit object in the map\n')
+  f.write(f'G4 P{1900 - 12 * 1000/60} ; wait until first object\n')
   f.write('; START MAP\n')
   f.write('\n')
 
@@ -99,8 +107,6 @@ def create_gcode_from_replay(output_file, replay):
       f.writelines(headerfile.readlines())
 
     f.write('G1 Z20 ; raise nozzle before travelling to tablet\n')
-    f.write(f'G1 X{gcode_tablet_origin_x:.3f} Y{gcode_tablet_origin_y:.3f} F2000 ; move to tablet origin\n')
-    f.write(f'G1 Z{gcode_tablet_z} ; lower nozzle to tablet\n')
 
     # pre beatmap gcode
     first_event = replay.play_data[3]
@@ -139,8 +145,6 @@ def create_gcode_from_beatmap(output_file, beatmap):
       f.writelines(headerfile.readlines())
 
     f.write('G1 Z20 ; raise nozzle before travelling to tablet\n')
-    f.write(f'G1 X{gcode_tablet_origin_x:.3f} Y{gcode_tablet_origin_y:.3f} F2000 ; move to tablet origin\n')
-    f.write(f'G1 Z{gcode_tablet_z} ; lower nozzle to tablet\n')
 
     circles_and_sliders = [o for o in beatmap.hit_objects if o.type & HitObjectType.CIRCLE or o.type & HitObjectType.SLIDER]
 
@@ -171,16 +175,17 @@ def create_gcode_from_beatmap(output_file, beatmap):
             comment = f'; wait on circle'
           elif hit_object.type & HitObjectType.SLIDER:
             comment = f'; wait on slider'
-          f.write(f'G4 F{delta_t:.1f} {comment}\n') # F units: mm/minute (multiply by 60000 to do conversion)
-        elif wait_time < 0.01:
+          f.write(f'G4 P{delta_t:.1f} {comment}\n') # F units: mm/minute (multiply by 60000 to do conversion)
+        else:
           if hit_object.type & HitObjectType.CIRCLE:
             comment1 = f'; move to circle'
             comment2 = f'; wait on circle'
           elif hit_object.type & HitObjectType.SLIDER:
             comment1 = f'; move to slider'
             comment2 = f'; wait on slider'
-          f.write(f'G1 X{x:.3f} Y{y:.3f} F{clamp(speed * 60000, 0, 20000):.1f} {comment1}\n') # F units: mm/minute (multiply by 60000 to do conversion)
-          f.write(f'G4 F{wait_time:.1f} {comment2}\n') # F units: mm/minute (multiply by 60000 to do conversion)
+          f.write(f'G1 X{x:.3f} Y{y:.3f} F{clamp(speed * 60000, 0, 20000):.0f} {comment1}\n') # F units: mm/minute (multiply by 60000 to do conversion)
+          if wait_time > 1:
+            f.write(f'G4 P{wait_time:.1f} {comment2}\n')
 
         previous_x = x
         previous_y = y
