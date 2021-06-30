@@ -131,7 +131,7 @@ G4 P44.0 ; (2) distance: 1.00mm, speed: 1111.3mm/min
 G1 X83.083 Y174.015 F12000
 G4 P114.0 ; LOCK (1) distance: 1.04mm, speed: 571.0mm/min
 G1 X82.436 Y174.212 F12000
-G4 P64.0 ; LOCK (was too fast) (2) distance: 0.68mm, speed: 751.7mm/min
+G4 P44.0 ; (2) distance: 0.68mm, speed: 751.7mm/min
 
 G1 X83.486 Y174.310 F12000
 G4 P154.0 ; (1) distance: 1.06mm, speed: 580.8mm/min
@@ -141,7 +141,7 @@ G4 P44.0 ; (2) distance: 0.71mm, speed: 787.4mm/min
 G1 X85.024 Y173.759 F12000
 G4 P154.0 ; (1) distance: 0.94mm, speed: 518.7mm/min
 G1 X84.659 Y174.350 F12000
-G4 P65.0 ; LOCK (was too fast) (2) distance: 0.70mm, speed: 765.4mm/min
+G4 P45.0 ; (2) distance: 0.70mm, speed: 765.4mm/min
 
 G1 X84.856 Y173.276 F12000
 G4 P153.0 ; (1) distance: 1.09mm, speed: 603.8mm/min

@@ -16,8 +16,9 @@ def clamp(num, min_value, max_value):
 max_printer_travel_speed_mm_per_sec = 180
 
 # parameters for conversion from osu coordinates to 3d printer coordinates
+y_compensation_factor = 1.05
 tablet_area_width_mm = 8
-tablet_area_height_mm = 4.5 
+tablet_area_height_mm = 4.5 * y_compensation_factor
 
 gcode_tablet_origin_x = 80
 gcode_tablet_origin_y = 175
@@ -28,8 +29,8 @@ repeat_count = 1
 
 # for converting beatmap object positions to gcode
 speed_factor = 2 # move to next object 2x faster than theoretically necessary
-# wait_offset = 0 # wait longer or shorter than theoretically necessary
-wait_offset = 64
+# wait_subtract = 0 # wait longer or shorter than theoretically necessary
+wait_subtract = 101
 
 # these need to be adjusted depending on the orientation you place the tablet on the printer
 flip_axis_x = False
@@ -72,8 +73,6 @@ max_printer_travel_speed_mm_per_min = 60 * max_printer_travel_speed_mm_per_sec
 
 def pre_beatmap_gcode(f, initial_x, initial_y):
   # move cursor to song button
-  asdfx = osu_x_to_gcode_mm(osu_min_x + osu_width * 0)
-  asdfy = osu_y_to_gcode_mm(osu_min_y + osu_height * 0.5)
   menu_button_x = osu_x_to_gcode_mm(osu_min_x + osu_width * 1)
   menu_button_y = osu_y_to_gcode_mm(osu_min_y + osu_height * 0.5)
   skip_button_x = osu_x_to_gcode_mm(osu_min_x + osu_width * 0.95)
@@ -159,7 +158,7 @@ def create_gcode_from_beatmap(output_file, beatmap):
       previous_x = initial_x
       previous_y = initial_y
       previous_time = first_object.time
-      combo = 1
+      combo = 2
       for hit_object in circles_and_sliders[1:]:
         if hit_object.type & HitObjectType.NEW_COMBO:
           combo = 1
@@ -179,11 +178,11 @@ def create_gcode_from_beatmap(output_file, beatmap):
           print_and_write(f, f'G4 P{delta_t:.1f} ; ({combo}) stationary\n')
         else:
           # move
-          print_and_write(f, f'G1 X{x:.3f} Y{y:.3f} F{12000}\n') # F units: mm/minute (multiply by 60000 to do conversion)
+          print_and_write(f, f'G1 X{x:.3f} Y{y:.3f} F{12000} ; ({combo}) distance: {distance:.2f}mm, speed: {speed * 60000:.1f}mm/min\n') # F units: mm/minute (multiply by 60000 to do conversion)
           # then wait
           # wait_time = delta_t * wait_factor
-          wait_time = clamp(delta_t - wait_offset, 0, 9999999999)
-          print_and_write(f, f'G4 P{wait_time:.1f} ; distance: {distance:.2f}mm, speed: {speed * 60000:.1f}mm/min\n')
+          wait_time = clamp(delta_t - wait_subtract, 0, 9999999999)
+          print_and_write(f, f'{f"G4 P{wait_time:.1f}".ljust(26)} ; ({combo})\n')
 
         previous_x = x
         previous_y = y
@@ -194,25 +193,31 @@ def create_gcode_from_beatmap(output_file, beatmap):
     with open('footer.gcode') as footerfile:
       f.writelines(footerfile.readlines())
     
+  # write from buffer to actual file
   with open('buffer.txt', 'r') as f:
-    # write output
+    # with open(output_file, 'w') as f2:
+    #   f2.writelines(f.readlines())
+    # return
     if os.path.isfile(output_file):
-      # read contents into memory
+      # 1. read existing contents into memory
       with open(output_file, 'r') as f2:
         existing_lines = f2.readlines()
-      # write back lines with selective replace
+      # 2. make backup
+      with open(output_file + '.bak', 'w') as f3:
+        f3.writelines(existing_lines)
+      # 3. write back lines with selective replace
       with open(output_file, 'w') as f2:
         for l1, l2 in zip(f.readlines(), existing_lines):
           if l1 != l2:
             if 'LOCK' in l2:
-              print(f'keeping locked line: {l2}')
+              print(f'keeping locked line: {l2.rstrip()}')
               f2.write(l2) # write back old line
             else:
               f2.write(l1) # write new line
           else:
             f2.write(l2) # write back old line
     else:
-      with open(output_file) as f2:
+      with open(output_file, 'w+') as f2:
         f2.writelines(f.readlines())
 
   # os.remove('buffer.txt')
