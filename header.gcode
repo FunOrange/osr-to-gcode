@@ -23,8 +23,8 @@ M862.1 P0.4 ; nozzle diameter check
 M115 U3.9.2 ; tell printer latest fw version
 G90 ; use absolute coordinates
 M83 ; extruder relative mode
-G28 W ; home all without mesh bed level
-G1 X0 Y0 F1000.0 ; go outside print area
+; G28 W ; home all without mesh bed level
+; G1 X0 Y0 F1000.0 ; go outside print area
 
 ; Don't change E values below. Excessive value can damage the printer.
 

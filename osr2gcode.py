@@ -30,7 +30,7 @@ repeat_count = 1
 # for converting beatmap object positions to gcode
 speed_factor = 2 # move to next object 2x faster than theoretically necessary
 # wait_subtract = 0 # wait longer or shorter than theoretically necessary
-wait_subtract = 101
+wait_subtract = 96
 
 # these need to be adjusted depending on the orientation you place the tablet on the printer
 flip_axis_x = False
