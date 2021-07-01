@@ -6,6 +6,7 @@
 ; G4 ; wait
 
 ; G28 W ; home all without mesh bed level
+G1 X10.0 ; move aside
 M84 ; disable motors
 M73 P100 R0
 M73 Q100 S0

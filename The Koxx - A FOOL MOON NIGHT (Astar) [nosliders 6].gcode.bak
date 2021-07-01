@@ -55,233 +55,233 @@ G4 P1760 ; wait until first object
 ; START MAP
 
 G1 X84.340 Y173.098 F16000 ; (2) distance: 2.45mm, speed: 1348.7mm/min
-G4 P15.0                   ; (2)
+G4 P16.0                   ; (2) LOCK
 
 G1 X82.173 Y173.887 F16000 ; (1) distance: 2.31mm, speed: 1280.9mm/min
-G4 P14.0                   ; (1)
+G4 P15.0                   ; (1) LOCK
 G1 X83.749 Y171.581 F16000 ; (2) distance: 2.79mm, speed: 1537.2mm/min
-G4 P15.0                   ; (2)
+G4 P16.0                   ; (2) LOCK
 
 G1 X84.734 Y173.946 F16000 ; (1) distance: 2.56mm, speed: 1410.1mm/min
-G4 P15.0                   ; (1)
+G4 P16.0                   ; (1) LOCK
 G1 X82.858 Y172.221 F16000 ; (2) distance: 2.55mm, speed: 1415.6mm/min
-G4 P14.0                   ; (2)
-
+G4 P15.0                   ; (2) LOCK
+; white LOCK
 G1 X85.418 Y172.359 F16000 ; (1) distance: 2.56mm, speed: 1411.6mm/min
-G4 P15.0                   ; (1)
+G4 P16.0                   ; (1) LOCK
 G1 X83.214 Y173.108 F16000 ; (2) distance: 2.33mm, speed: 1281.5mm/min
-G4 P15.0                   ; (2)
-
+G4 P16.0                   ; (2) LOCK
+; cyan, slow down here LOCK
 G1 X82.773 Y171.000 F16000 ; (1) distance: 2.15mm, speed: 1196.7mm/min
-G4 P14.0                   ; (1)
+G4 P22.0                   ; (1) LOCK
 G1 X82.267 Y172.931 F16000 ; (2) distance: 2.00mm, speed: 1099.0mm/min
-G4 P15.0                   ; (2)
-
+G4 P23.0                   ; (2) LOCK
+; green LOCK
 G1 X84.002 Y172.931 F16000 ; (1) distance: 1.74mm, speed: 955.2mm/min
-G4 P15.0                   ; (1)
+G4 P23.0                   ; (1) LOCK
 G1 X81.920 Y172.015 F16000 ; (2) distance: 2.28mm, speed: 1252.3mm/min
-G4 P15.0                   ; (2)
-
+G4 P23.0                   ; (2) LOCK
+; pink LOCK
 G1 X84.180 Y171.808 F16000 ; (1) distance: 2.27mm, speed: 1261.1mm/min
-G4 P14.0                   ; (1)
+G4 P22.0                   ; (1) LOCK
 G1 X82.614 Y173.739 F16000 ; (2) distance: 2.49mm, speed: 1368.8mm/min
-G4 P15.0                   ; (2)
-
+G4 P23.0                   ; (2) LOCK
+; purple, speed up slightly here LOCK
 G1 X82.839 Y171.069 F16000 ; (1) distance: 2.68mm, speed: 1475.0mm/min
-G4 P15.0                   ; (1)
+G4 P22.0                   ; (1) LOCK
 G1 X83.308 Y173.197 F16000 ; (2) distance: 2.18mm, speed: 1210.7mm/min
-G4 P14.0                   ; (2)
+G4 P21.0                   ; (2) LOCK
 
 G1 X82.014 Y171.167 F16000 ; (1) distance: 2.41mm, speed: 1325.1mm/min
-G4 P15.0                   ; (1)
+G4 P22.0                   ; (1) LOCK
 G1 X84.087 Y170.941 F16000 ; (2) distance: 2.09mm, speed: 1147.9mm/min
-G4 P15.0                   ; (2)
+G4 P22.0                   ; (2) LOCK
 
 G1 X83.111 Y171.896 F16000 ; (1) distance: 1.37mm, speed: 758.7mm/min
-G4 P14.0                   ; (1)
+G4 P21.0                   ; (1) LOCK
 G1 X85.062 Y172.133 F16000 ; (2) distance: 1.97mm, speed: 1081.8mm/min
-G4 P15.0                   ; (2)
+G4 P22.0                   ; (2) LOCK
 
 G1 X82.905 Y170.950 F16000 ; (1) distance: 2.46mm, speed: 1354.2mm/min
-G4 P15.0                   ; (1)
+G4 P22.0                   ; (1) LOCK
 G1 X82.483 Y172.694 F16000 ; (2) distance: 1.79mm, speed: 996.8mm/min
-G4 P14.0                   ; (2)
+G4 P21.0                   ; (2) LOCK
 
 G1 X84.077 Y171.788 F16000 ; (1) distance: 1.83mm, speed: 1009.7mm/min
-G4 P15.0                   ; (1)
+G4 P22.0                   ; (1) LOCK
 G1 X81.779 Y171.877 F16000 ; (2) distance: 2.30mm, speed: 1265.9mm/min
-G4 P15.0                   ; (2)
+G4 P22.0                   ; (2) LOCK
 
 G1 X83.261 Y173.345 F16000 ; (1) distance: 2.09mm, speed: 1148.3mm/min
-G4 P15.0                   ; (1)
+G4 P22.0                   ; (1) LOCK
 G1 X83.618 Y171.138 F16000 ; (2) distance: 2.24mm, speed: 1242.0mm/min
-G4 P14.0                   ; (2)
+G4 P21.0                   ; (2) LOCK
 
 G1 X84.509 Y172.576 F16000 ; (1) distance: 1.69mm, speed: 931.5mm/min
-G4 P15.0                   ; (1)
+G4 P22.0                   ; (1) LOCK
 G1 X82.464 Y171.611 F16000 ; (2) distance: 2.26mm, speed: 1244.8mm/min
-G4 P15.0                   ; (2)
+G4 P22.0                   ; (2) LOCK
 
 G1 X84.677 Y171.118 F16000 ; (1) distance: 2.27mm, speed: 1259.9mm/min
-G4 P14.0                   ; (1)
+G4 P21.0                   ; (1) LOCK
 G1 X83.374 Y172.419 F16000 ; (2) distance: 1.84mm, speed: 1013.7mm/min
-G4 P15.0                   ; (2)
+G4 P22.0                   ; (2) LOCK
 G1 X81.882 Y170.773 F16000 ; (3)===D distance: 2.22mm, speed: 1222.4mm/min
-G4 P15.0                   ; (3)===D
+G4 P102.0                   ; (3)===D LOCK
 
 G1 X83.758 Y171.019 F16000 ; (1) distance: 1.89mm, speed: 523.2mm/min
-G4 P123.0                  ; (1)
+G4 P92.0                   ; (1) LOCK, --- SPEED UP HERE ---
 G1 X81.939 Y173.837 F16000 ; (2) distance: 3.35mm, speed: 1846.5mm/min
-G4 P15.0                   ; (2)
+G4 P10.0                    ; (2) LOCK
 
 G1 X84.162 Y172.685 F16000 ; (1) distance: 2.50mm, speed: 1378.4mm/min
-G4 P15.0                   ; (1)
+G4 P10.0                    ; (1) LOCK
 G1 X81.666 Y171.680 F16000 ; (2) distance: 2.69mm, speed: 1494.4mm/min
-G4 P14.0                   ; (2)
+G4 P9.0                    ; (2) LOCK
 
 G1 X84.555 Y173.542 F16000 ; (1) distance: 3.44mm, speed: 1892.0mm/min
-G4 P15.0                   ; (1)
+G4 P5.0                    ; (1) LOCK
 G1 X82.792 Y170.950 F16000 ; (2) distance: 3.13mm, speed: 1725.4mm/min
-G4 P15.0                   ; (2)
+G4 P5.0                    ; (2) LOCK
 
 G1 X83.167 Y173.995 F16000 ; (1) distance: 3.07mm, speed: 1704.2mm/min
-G4 P14.0                   ; (1)
+G4 P4.0                    ; (1) LOCK
 G1 X84.968 Y171.216 F16000 ; (2) distance: 3.31mm, speed: 1822.6mm/min
-G4 P15.0                   ; (2)
+G4 P5.0                    ; (2) LOCK
 
 G1 X82.098 Y173.197 F16000 ; (1) distance: 3.49mm, speed: 1919.5mm/min
-G4 P15.0                   ; (1)
+G4 P5.0                    ; (1) LOCK
 G1 X85.090 Y174.153 F16000 ; (2) distance: 3.14mm, speed: 1745.1mm/min
-G4 P14.0                   ; (2)
+G4 P4.0                    ; (2) LOCK
 
 G1 X83.618 Y170.921 F16000 ; (1) distance: 3.55mm, speed: 1954.9mm/min
-G4 P15.0                   ; (1)
+G4 P5.0                    ; (1) LOCK
 G1 X83.861 Y174.251 F16000 ; (2) distance: 3.34mm, speed: 1838.1mm/min
-G4 P15.0                   ; (2)
+G4 P5.0                    ; (2) LOCK
 
 G1 X85.081 Y171.975 F16000 ; (1) distance: 2.58mm, speed: 1434.5mm/min
-G4 P14.0                   ; (1)
+G4 P4.0                    ; (1) LOCK
 G1 X82.107 Y172.300 F16000 ; (2) distance: 2.99mm, speed: 1646.5mm/min
-G4 P15.0                   ; (2)
+G4 P5.0                    ; (2) LOCK
 
 G1 X85.503 Y173.118 F16000 ; (1) distance: 3.49mm, speed: 1922.5mm/min
-G4 P15.0                   ; (1)
+G4 P5.0                    ; (1) LOCK
 G1 X82.726 Y171.305 F16000 ; (2) distance: 3.32mm, speed: 1825.3mm/min
-G4 P15.0                   ; (2)
+G4 P5.0                    ; (2) LOCK
 
 G1 X82.952 Y174.005 F16000 ; (1) distance: 2.71mm, speed: 1505.0mm/min
-G4 P14.0                   ; (1)
+G4 P4.0                    ; (1) LOCK
 G1 X84.687 Y170.960 F16000 ; (2) distance: 3.50mm, speed: 1929.0mm/min
-G4 P15.0                   ; (2)
+G4 P5.0                    ; (2) LOCK
 
 G1 X82.070 Y173.207 F16000 ; (1) distance: 3.45mm, speed: 1898.5mm/min
-G4 P15.0                   ; (1)
+G4 P5.0                    ; (1) LOCK
 G1 X85.287 Y174.054 F16000 ; (2) distance: 3.33mm, speed: 1848.3mm/min
-G4 P14.0                   ; (2)
+G4 P4.0                    ; (2) LOCK
 
 G1 X82.014 Y171.906 F16000 ; (1) distance: 3.92mm, speed: 2155.2mm/min
-G4 P15.0                   ; (1)
+G4 P5.0                    ; (1) LOCK
 G1 X83.730 Y174.222 F16000 ; (2) distance: 2.88mm, speed: 1586.6mm/min
-G4 P15.0                   ; (2)
+G4 P5.0                    ; (2) LOCK
 
 G1 X83.908 Y171.148 F16000 ; (1) distance: 3.08mm, speed: 1710.7mm/min
-G4 P14.0                   ; (1)
+G4 P4.0                    ; (1) LOCK
 G1 X85.475 Y172.773 F16000 ; (2) distance: 2.26mm, speed: 1242.7mm/min
-G4 P15.0                   ; (2)
+G4 P5.0                    ; (2) LOCK
 
 G1 X82.651 Y174.025 F16000 ; (1) distance: 3.09mm, speed: 1699.9mm/min
-G4 P15.0                   ; (1)
+G4 P5.0                    ; (1) LOCK
 G1 X84.996 Y171.492 F16000 ; (2) distance: 3.45mm, speed: 1899.8mm/min
-G4 P15.0                   ; (2)
+G4 P5.0                    ; (2) LOCK
 
 G1 X82.342 Y170.980 F16000 ; (1) distance: 2.70mm, speed: 1501.9mm/min
-G4 P14.0                   ; (1)
+G4 P4.0                    ; (1) LOCK
 G1 X84.996 Y173.571 F16000 ; (2) distance: 3.71mm, speed: 2042.0mm/min
-G4 P15.0                   ; (2)
-
+G4 P5.0                    ; (2) LOCK
+; slow down here LOCK
 G1 X81.920 Y173.276 F16000 ; (1) distance: 3.09mm, speed: 1701.3mm/min
-G4 P15.0                   ; (1)
+G4 P3.0                    ; (1) LOCK
 G1 X84.734 Y172.369 F16000 ; (2) distance: 2.96mm, speed: 1642.4mm/min
-G4 P14.0                   ; (2)
-
+G4 P14.0                   ; (2) LOCK
+; green LOCK
 G1 X82.689 Y173.630 F16000 ; (1) distance: 2.40mm, speed: 1322.5mm/min
-G4 P15.0                   ; (1)
+G4 P15.0                   ; (1) LOCK
 G1 X85.897 Y173.916 F16000 ; (2) distance: 3.22mm, speed: 1772.8mm/min
-G4 P15.0                   ; (2)
-
+G4 P15.0                   ; (2) LOCK
+; pink slider LOCK
 G1 X83.177 Y172.290 F16000 ; (1)===D distance: 3.17mm, speed: 1760.5mm/min
-G4 P14.0                   ; (1)===D
-
+G4 P14.0                   ; (1)===D LOCK
+; purple LOCK --- speed up here
 G1 X85.625 Y171.394 F16000 ; (1) distance: 2.61mm, speed: 717.6mm/min
-G4 P124.0                  ; (1)
+G4 P116.0                  ; (1) LOCK
 G1 X84.490 Y173.690 F16000 ; (2) distance: 2.56mm, speed: 1422.8mm/min
-G4 P14.0                   ; (2)
-
+G4 P8.0                   ; (2) LOCK
+; white LOCK
 G1 X84.152 Y170.911 F16000 ; (1) distance: 2.80mm, speed: 1540.7mm/min
-G4 P15.0                   ; (1)
+G4 P9.0                   ; (1) LOCK
 G1 X85.916 Y172.891 F16000 ; (2) distance: 2.65mm, speed: 1459.7mm/min
-G4 P15.0                   ; (2)
-
+G4 P9.0                   ; (2) LOCK
+; cyan LOCK
 G1 X82.886 Y173.433 F16000 ; (1) distance: 3.08mm, speed: 1694.2mm/min
-G4 P15.0                   ; (1)
+G4 P9.0                   ; (1) LOCK
 G1 X86.328 Y173.680 F16000 ; (2) distance: 3.45mm, speed: 1917.3mm/min
-G4 P14.0                   ; (2)
-
+G4 P8.0                   ; (2) LOCK
+; green 1 LOCK
 G1 X83.927 Y171.896 F16000 ; (1) distance: 2.99mm, speed: 1646.5mm/min
-G4 P15.0                   ; (1)
+G4 P9.0                   ; (1) LOCK
 G1 X85.503 Y174.241 F16000 ; (2) distance: 2.83mm, speed: 1555.2mm/min
-G4 P15.0                   ; (2)
-
+G4 P9.0                   ; (2) LOCK
+; pink LOCK
 G1 X85.831 Y171.118 F16000 ; (1) distance: 3.14mm, speed: 1744.8mm/min
-G4 P14.0                   ; (1)
+G4 P8.0                   ; (1) LOCK
 G1 X84.865 Y173.542 F16000 ; (2) distance: 2.61mm, speed: 1436.3mm/min
-G4 P15.0                   ; (2)
-
+G4 P9.0                   ; (2) LOCK
+; purple LOCK
 G1 X84.002 Y170.783 F16000 ; (1) distance: 2.89mm, speed: 1591.2mm/min
-G4 P15.0                   ; (1)
+G4 P9.0                   ; (1) LOCK
 G1 X85.962 Y172.763 F16000 ; (2) distance: 2.79mm, speed: 1548.1mm/min
-G4 P14.0                   ; (2)
-
+G4 P8.0                   ; (2) LOCK
+; white LOCK
 G1 X82.905 Y173.857 F16000 ; (1) distance: 3.25mm, speed: 1787.6mm/min
-G4 P15.0                   ; (1)
+G4 P9.0                   ; (1) LOCK
 G1 X85.625 Y174.231 F16000 ; (2) distance: 2.75mm, speed: 1511.5mm/min
-G4 P15.0                   ; (2)
-
+G4 P9.0                   ; (2) LOCK
+; cyan LOCK --- speed up here?
 G1 X83.496 Y172.054 F16000 ; (1) distance: 3.05mm, speed: 1676.4mm/min
-G4 P15.0                   ; (1)
+G4 P4.0                    ; (1) LOCK
 G1 X83.861 Y174.399 F16000 ; (2) distance: 2.37mm, speed: 1318.5mm/min
-G4 P14.0                   ; (2)
-
+G4 P3.0                    ; (2) LOCK
+; green 2 LOCK
 G1 X84.799 Y171.433 F16000 ; (1) distance: 3.11mm, speed: 1712.2mm/min
-G4 P15.0                   ; (1)
+G4 P4.0                    ; (1) LOCK
 G1 X82.192 Y172.399 F16000 ; (2) distance: 2.78mm, speed: 1530.6mm/min
-G4 P15.0                   ; (2)
-
+G4 P4.0                    ; (2) LOCK
+; pink LOCK
 G1 X85.090 Y173.286 F16000 ; (1) distance: 3.03mm, speed: 1683.9mm/min
-G4 P14.0                   ; (1)
+G4 P3.0                    ; (1) LOCK
 G1 X81.788 Y171.364 F16000 ; (2) distance: 3.82mm, speed: 2102.8mm/min
-G4 P15.0                   ; (2)
+G4 P4.0                    ; (2) LOCK
 
 G1 X82.970 Y173.759 F16000 ; (1) distance: 2.67mm, speed: 1469.8mm/min
-G4 P15.0                   ; (1)
+G4 P4.0                    ; (1) LOCK
 G1 X83.843 Y171.019 F16000 ; (2) distance: 2.87mm, speed: 1597.0mm/min
-G4 P14.0                   ; (2)
+G4 P3.0                    ; (2) LOCK
 
 G1 X82.089 Y173.286 F16000 ; (1) distance: 2.87mm, speed: 1577.4mm/min
-G4 P15.0                   ; (1)
+G4 P4.0                    ; (1) LOCK
 G1 X84.443 Y173.965 F16000 ; (2) distance: 2.45mm, speed: 1348.9mm/min
-G4 P15.0                   ; (2)
+G4 P4.0                    ; (2) LOCK
 
 G1 X81.648 Y172.389 F16000 ; (1) distance: 3.21mm, speed: 1782.8mm/min
-G4 P14.0                   ; (1)
+G4 P3.0                    ; (1) LOCK
 G1 X84.602 Y171.611 F16000 ; (2) distance: 3.06mm, speed: 1681.9mm/min
-G4 P15.0                   ; (2)
-
+G4 P4.0                    ; (2) LOCK
+; green 3 LOCK
 G1 X83.674 Y174.143 F16000 ; (1) distance: 2.70mm, speed: 1484.6mm/min
-G4 P15.0                   ; (1)
+G4 P4.0                    ; (1) LOCK
 G1 X81.666 Y171.354 F16000 ; (2) distance: 3.44mm, speed: 1891.2mm/min
-G4 P15.0                   ; (2)
-
+G4 P4.0                    ; (2) LOCK
+; pink LOCK --- slow down here
 G1 X85.203 Y170.980 F16000 ; (1) distance: 3.56mm, speed: 1975.5mm/min
 G4 P14.0                   ; (1)
 G1 X82.933 Y173.089 F16000 ; (2) distance: 3.10mm, speed: 1705.4mm/min
@@ -348,7 +348,7 @@ G1 X83.439 Y173.493 F16000 ; (2) distance: 2.52mm, speed: 1384.8mm/min
 G4 P15.0                   ; (2)
 
 G1 X83.449 Y170.941 F16000 ; (1)===D distance: 2.55mm, speed: 1417.7mm/min
-G4 P14.0                   ; (1)===D
+G4 P114.0                   ; (1)===D LOCK
 
 G1 X84.818 Y171.818 F16000 ; (1)===D distance: 1.63mm, speed: 447.6mm/min
 G4 P124.0                  ; (1)===D
@@ -360,7 +360,7 @@ G1 X85.343 Y173.305 F16000 ; (1)===D distance: 2.90mm, speed: 797.4mm/min
 G4 P124.0                  ; (1)===D
 
 G1 X82.998 Y173.896 F16000 ; (1) distance: 2.42mm, speed: 668.7mm/min
-G4 P123.0                  ; (1)
+G4 P23.0                  ; (1) LOCK
 G1 X82.558 Y171.374 F16000 ; (2) distance: 2.56mm, speed: 1409.5mm/min
 G4 P15.0                   ; (2)
 

@@ -27,10 +27,8 @@ tap_height = 0.5
 
 repeat_count = 1
 
-# for converting beatmap object positions to gcode
-speed_factor = 2 # move to next object 2x faster than theoretically necessary
-# wait_subtract = 0 # wait longer or shorter than theoretically necessary
-wait_subtract = 96
+initial_delay = 1760
+faster = 94
 
 # these need to be adjusted depending on the orientation you place the tablet on the printer
 flip_axis_x = False
@@ -91,7 +89,7 @@ def pre_beatmap_gcode(f, initial_x, initial_y):
   f.write(f'G1 Z{gcode_tablet_z:.2f} F9000 ; tap release\n')
   f.write(f'G4 P500 ; wait\n')
   f.write(f'G1 X{initial_x:.3f} Y{initial_y:.3f} F2000 ; move to first hit object in the map\n')
-  f.write(f'G4 P{1900 - 12 * 1000/60} ; wait until first object\n')
+  f.write(f'G4 P{initial_delay} ; wait until first object\n')
   f.write('; START MAP\n')
   f.write('\n')
 
@@ -100,42 +98,42 @@ def print_and_write(f, s):
   f.write(s)
 
 
-def create_gcode_from_replay(output_file, replay):
-  with open(output_file, 'w+') as f:
-    # header gcode
-    with open('header.gcode') as headerfile:
-      f.writelines(headerfile.readlines())
+# def create_gcode_from_replay(output_file, replay):
+#   with open(output_file, 'w+') as f:
+#     # header gcode
+#     with open('header.gcode') as headerfile:
+#       f.writelines(headerfile.readlines())
 
-    f.write('G1 Z20 ; raise nozzle before travelling to tablet\n')
+#     f.write('G1 Z20 ; raise nozzle before travelling to tablet\n')
 
-    # pre beatmap gcode
-    first_event = replay.play_data[3]
-    initial_x = osu_x_to_gcode_mm(first_event.x)
-    initial_y = osu_y_to_gcode_mm(first_event.y)
-    pre_beatmap_gcode(f, initial_x, initial_y)
+#     # pre beatmap gcode
+#     first_event = replay.play_data[3]
+#     initial_x = osu_x_to_gcode_mm(first_event.x)
+#     initial_y = osu_y_to_gcode_mm(first_event.y)
+#     pre_beatmap_gcode(f, initial_x, initial_y)
 
-    # main beatmap gcode
-    previous_x = initial_x
-    previous_y = initial_y
-    speeds = []
-    for event in replay.play_data[4:]: # skip first 4 events (first 3 are garbage, 4th is initial position)
-      x = osu_x_to_gcode_mm(event.x)
-      y = osu_y_to_gcode_mm(event.y)
-      delta_x = x - previous_x
-      delta_y = y - previous_y
-      distance = math.sqrt(delta_x*delta_x + delta_y*delta_y) # WARNING: advanced math
-      if distance > 0 and event.time_delta > 0:
-        speed = distance / event.time_delta # units: mm/ms
-        speeds.append(speed * 60000)
-        print_and_write(f, f'G1 X{x:.2f} Y{y:.2f} F{clamp(speed * 60000, 0, 20000):.2f}\n') # F units: mm/minute (multiply by 60000 to do conversion)
-      else:
-        f.write(f'G4 P{event.time_delta}\n') # just wait
-      previous_x = x
-      previous_y = y
+#     # main beatmap gcode
+#     previous_x = initial_x
+#     previous_y = initial_y
+#     speeds = []
+#     for event in replay.play_data[4:]: # skip first 4 events (first 3 are garbage, 4th is initial position)
+#       x = osu_x_to_gcode_mm(event.x)
+#       y = osu_y_to_gcode_mm(event.y)
+#       delta_x = x - previous_x
+#       delta_y = y - previous_y
+#       distance = math.sqrt(delta_x*delta_x + delta_y*delta_y) # WARNING: advanced math
+#       if distance > 0 and event.time_delta > 0:
+#         speed = distance / event.time_delta # units: mm/ms
+#         speeds.append(speed * 60000)
+#         print_and_write(f, f'G1 X{x:.2f} Y{y:.2f} F{clamp(speed * 60000, 0, 20000):.2f}\n') # F units: mm/minute (multiply by 60000 to do conversion)
+#       else:
+#         f.write(f'G4 P{event.time_delta}\n') # just wait
+#       previous_x = x
+#       previous_y = y
     
-    # footer gcode
-    with open('footer.gcode') as footerfile:
-      f.writelines(footerfile.readlines())
+#     # footer gcode
+#     with open('footer.gcode') as footerfile:
+#       f.writelines(footerfile.readlines())
 
 def create_gcode_from_beatmap(output_file, beatmap):
   with open('buffer.txt', 'w+') as f:
@@ -162,6 +160,10 @@ def create_gcode_from_beatmap(output_file, beatmap):
       for hit_object in circles_and_sliders[1:]:
         if hit_object.type & HitObjectType.NEW_COMBO:
           combo = 1
+        if hit_object.type & HitObjectType.SLIDER:
+          slider = "===D"
+        else:
+          slider = ""
         x = osu_x_to_gcode_mm(hit_object.point.x)
         y = osu_y_to_gcode_mm(hit_object.point.y)
         time = hit_object.time
@@ -170,7 +172,8 @@ def create_gcode_from_beatmap(output_file, beatmap):
         delta_y = y - previous_y
         delta_t = hit_object.time - previous_time
         distance = math.sqrt(delta_x*delta_x + delta_y*delta_y) # WARNING: advanced math
-        speed = speed_factor * distance / delta_t # units: mm/ms
+        speed = distance / delta_t # units: mm/ms
+        speed *= 60000 # units: mm/minute (multiply by 60000 to do conversion)
         if combo == 1:
           print_and_write(f, '\n')
         if distance < 0.01:
@@ -178,11 +181,10 @@ def create_gcode_from_beatmap(output_file, beatmap):
           print_and_write(f, f'G4 P{delta_t:.1f} ; ({combo}) stationary\n')
         else:
           # move
-          print_and_write(f, f'G1 X{x:.3f} Y{y:.3f} F{12000} ; ({combo}) distance: {distance:.2f}mm, speed: {speed * 60000:.1f}mm/min\n') # F units: mm/minute (multiply by 60000 to do conversion)
+          print_and_write(f, f'G1 X{x:.3f} Y{y:.3f} F{16000} ; ({combo}){slider} distance: {distance:.2f}mm, speed: {speed:.1f}mm/min\n') # F units: mm/minute 
           # then wait
-          # wait_time = delta_t * wait_factor
-          wait_time = clamp(delta_t - wait_subtract, 0, 9999999999)
-          print_and_write(f, f'{f"G4 P{wait_time:.1f}".ljust(26)} ; ({combo})\n')
+          wait_time = clamp(delta_t - faster, 0, 9999999999)
+          print_and_write(f, f'{f"G4 P{wait_time:.1f}".ljust(26)} ; ({combo}){slider}\n')
 
         previous_x = x
         previous_y = y
@@ -207,10 +209,12 @@ def create_gcode_from_beatmap(output_file, beatmap):
         f3.writelines(existing_lines)
       # 3. write back lines with selective replace
       with open(output_file, 'w') as f2:
+        line = 0
         for l1, l2 in zip(f.readlines(), existing_lines):
+          line += 1
           if l1 != l2:
             if 'LOCK' in l2:
-              print(f'keeping locked line: {l2.rstrip()}')
+              print(f'keeping locked line {line}: {l2.rstrip()}')
               f2.write(l2) # write back old line
             else:
               f2.write(l1) # write new line
