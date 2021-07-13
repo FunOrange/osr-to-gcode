@@ -78,7 +78,7 @@ class DifficultySettings(ABC):
                 approach_rate: float,
                 slider_multiplier: float,
                 slider_tick_rate: int):
-        self.hp_drain_rate = int(h_p_drain_rate)
+        self.hp_drain_rate = float(h_p_drain_rate)
         self.circle_size = float(circle_size)
         self.overall_difficulty = float(overall_difficulty)
         self.approach_rate = float(approach_rate)

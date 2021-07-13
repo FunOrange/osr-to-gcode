@@ -46,7 +46,7 @@ G1 Z14.5 ; lower nozzle to tablet
 G1 Z14.00 F9000 ; tap press
 G1 Z14.50 F9000 ; tap release
 G1 X82.764 Y173.384 F9000 ; move to first hit object in the map
-G4 P1850 ; wait until first object
+G4 P1090 ; LOCK wait until first object
 ; START MAP
 
 G1 X83.477 Y173.581 F188.31986686074103 ; (2) distance: 0.74mm

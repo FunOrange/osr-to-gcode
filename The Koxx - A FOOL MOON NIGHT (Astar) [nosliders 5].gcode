@@ -43,11 +43,11 @@ M83 ; use relative distances for extrusion
 G1 Z20 ; raise nozzle before travelling to tablet
 G1 X88.000 Y172.637 F12000 ; move nozzle on top of start song button
 G1 Z14.5 ; lower nozzle to tablet
-G1 Z14.00 F9000 ; tap press
+G1 Z13.80 F9000 ; tap press
 G1 Z14.50 F9000 ; tap release
 G4 P500 ; wait
 G1 X87.600 Y170.511 F2000 ; move nozzle to skip button 
-G1 Z14.00 F9000 ; tap press
+G1 Z13.80 F9000 ; tap press
 G1 Z14.50 F9000 ; tap release
 G4 P500 ; wait
 G1 X83.655 Y172.192 F2000 ; move to first hit object in the map
